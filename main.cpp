@@ -42,17 +42,16 @@ int main()
 
     // Some real example
     std::cout << "----TEST----" << std::endl;
+    int* pointers[1000];
+    for(size_t s = 0; s < 1000; s++)
     {
-        std::string test = "ABXEFDGFfA$^YF^Rfz^6ybzS";
-        std::cout << test << std::endl;
-        
-        std::vector<std::string> some_data;
-        for(size_t s = 0; s < 1000; s++)
-            some_data.push_back(test);
-        for(auto it: some_data)
-        {
-            std::cout << it[rand() % it.size()];
-        }
+        pointers[s] = (int*)my_malloc(256);
+        *pointers[s] = rand() % 10;
+    }
+    for(size_t s = 0; s < 1000; s++)
+    {
+        std::cout << *pointers[s] << ",";
+        my_free(pointers[s]);
     }
     std::cout << "----TEST END----" << std::endl;
 

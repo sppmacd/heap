@@ -1,7 +1,11 @@
 #include "heap.hpp"
 
 #include <assert.h>     // assert()
-#include <sys/mman.h>   // mmap(), munmap()
+#ifdef WINDOWS
+#   include "mman.h"       // mmap(), munmap()
+#else
+#   include <sys/mman.h>   // mmap(), munmap()
+#endif
 #include <stdlib.h>     // abort()
 #include <stdio.h>      // printf(), perror()
 #include <string.h>     // memset()
@@ -203,7 +207,8 @@ void* HeapBlock::alloc(size_t size, size_t align)
     size_t old_size = size;
     //printf("Size before align %zx: %zu\n", align - 1, size);
     size &= ~(align - 1);
-    size += align;
+    if(size != old_size)
+        size += align;
     // sanity check
     assert(old_size <= size);
     //printf("Size after align: %zu\n", size);
@@ -358,7 +363,7 @@ void HeapBlock::dump()
 
 // This is a hack to enable lazy-construction of heap also allowing to
 // call member functions of HeapBlock
-alignas(sizeof(HeapBlock)) char g_heap_data[sizeof(HeapBlock)];
+char g_heap_data[sizeof(HeapBlock)];
 HeapBlock& g_heap_storage = *reinterpret_cast<HeapBlock*>(&g_heap_data);
 bool g_heap_initialized { false };
 
