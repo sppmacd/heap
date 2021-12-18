@@ -432,6 +432,8 @@ void my_free(void* addr)
 }
 
 // Setup custom operators to see if this works for real code :)
+// NOTE: Real examples are removed from windows builds as it
+// would need disabling linking of standard library.
 void* operator new(size_t, void* addr) noexcept
 {
     return addr;
