@@ -10,7 +10,7 @@ This project is an implementation of a heap (free store). The functions implemen
 
 ## Build
 
-This project requires a C++17 compiler. It's tested on Linux (GCC and MinGW cross-compiling with Wine). It will *probably* work on MSVC.
+This project requires a C++20 compiler. It's tested on Linux (GCC and MinGW cross-compiling with Wine). It was also tested if compiles on msvc v19 (with [Compiler Explorer](https://godbolt.org/z/EoGzb1aoc))
 
 Building on Linux:
 ```sh
@@ -23,7 +23,6 @@ Run with:
 ```sh
 ./heap 
 ```
-
 
 ## How this works?
 

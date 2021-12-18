@@ -1,5 +1,6 @@
 #include "heap.hpp"
 
+#include <cstdint>      // uint32_t / u32
 #include <assert.h>     // assert()
 #ifdef WINDOWS
 #   include "mman.h"       // mmap(), munmap()
@@ -10,7 +11,7 @@
 #include <stdio.h>      // printf(), perror()
 #include <string.h>     // memset()
 
-using u32 = __UINT32_TYPE__;
+using u32 = uint32_t;
 
 template<class T>
 T max(T a, T b) { return a > b ? a : b; }
@@ -345,7 +346,7 @@ void HeapBlock::dump()
             (reinterpret_cast<size_t>(header) - reinterpret_cast<size_t>(m_data)),
             header->size);
         if(header->next())
-            printf(" next: %lu (%p)", reinterpret_cast<size_t>(header->next()) - reinterpret_cast<size_t>(m_data), header->next());
+            printf(" next: %zu (%p)", reinterpret_cast<size_t>(header->next()) - reinterpret_cast<size_t>(m_data), header->next());
 
         if(header->available())
             printf(" (available)");
