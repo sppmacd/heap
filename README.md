@@ -6,6 +6,24 @@ This project is an implementation of a heap (free store). The functions implemen
 * `void my_heap_dump()` (print heap blocks to stdout)
 * `void my_leak_check()` (try to find memory leaks, at least on the regular heap)
 * various overloads of `new`/`delete` operators to check if this works with standard containers
+    * They are removed from windows builds as they clash with `libstdc++`-provided definitions. A simple static array of pointers is used instead to stress an allocator a bit.
+
+## Build
+
+This project requires a C++17 compiler. It's tested on Linux (GCC and MinGW cross-compiling with Wine). It will *probably* work on MSVC.
+
+Building on Linux:
+```sh
+mkdir build
+cd build
+cmake .. -GNinja
+ninja -j4
+```
+Run with:
+```sh
+./heap 
+```
+
 
 ## How this works?
 
