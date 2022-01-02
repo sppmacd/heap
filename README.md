@@ -24,7 +24,7 @@ Run with:
 ./heap 
 ```
 
-## How this works?
+## How does this work?
 
 The free store consists of page-aligned heap blocks, of size 4 pages (16 KiB, assuming 4 KiB pages). A heap block can be considered a doubly-linked list node - pointers to previous and next blocks + data. The first block is a global variable (static storage duration) and has previous pointer always NULL.
 
